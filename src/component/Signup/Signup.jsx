@@ -44,6 +44,10 @@ function Signup() {
         }
     }
 
+    const handleSubmit = () => {
+        // handling form submit
+    }
+
     return (
         <div id="signup">
             <h1>Welcome to the signup page</h1>
@@ -88,7 +92,7 @@ function Signup() {
                     type="email"
                     onChange={handleInput}
                 />
-                <Button variant="outlined" onSubmit={handleInput} >Submit</Button>
+                <Button variant="outlined" onSubmit={handleSubmit} >Submit</Button>
             </Box>
         </div>
     );
