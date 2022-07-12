@@ -1,51 +1,21 @@
-import { Box, TextField, InputLabel, Input, InputAdornment, Button } from "@mui/material";
+import { Box, InputLabel, Input, InputAdornment, Button } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import { useState } from "react";
+import axios from 'axios';
+import { userObject, handleInput } from '../../functions/handleInput.js';
 
 function Signup() {
     let [tempPassword, setTempPassword] = useState("");
-    let [userObject, setUserObject] = useState({
-        username: "",
-        password: "",
-        email: ""
-    });
 
-    const handleInput = (e) => {
-        switch (e.target.id) {
-            case "username":
-                setUserObject({
-                    username: e.target.value,
-                    password: userObject.password,
-                    email: userObject.email
-                });
-                console.log(userObject.username);
-                break;
-            case "email":
-                setUserObject({
-                    username: userObject.username,
-                    password: userObject.password,
-                    email: e.target.value
-                });
-                console.log(userObject.email);
-                break;
-            case "confirmPassword":
-                if (e.target.value === tempPassword) {
-                    setUserObject({
-                        username: userObject.username,
-                        password: e.target.value,
-                        email: userObject.email
-                    });
-                    console.log("password set");
-                }
-                // negative feedback validation
-                break;
-            default:
-                console.log("Something went wrong");
+    const handleSubmit = async () => {
+        // checking password here, otherwise if they write "pass" then "password" the way we had it before, it would keep the password as "pass" even though they typed "password" fully
+        if (userObject.password !== tempPassword) {
+            console.log("password fields do not match");
+        } else {
+            // handling form submit
+            let result = await axios.post(`${process.env.REACT_APP_SERVER}/signup`, userObject);
+            console.log(result);
         }
-    }
-
-    const handleSubmit = () => {
-        // handling form submit
     }
 
     return (
@@ -92,8 +62,8 @@ function Signup() {
                     type="email"
                     onChange={handleInput}
                 />
-                <Button variant="outlined" onSubmit={handleSubmit} >Submit</Button>
             </Box>
+            <Button variant="outlined" onClick={handleSubmit}>Submit</Button>
         </div>
     );
 }
