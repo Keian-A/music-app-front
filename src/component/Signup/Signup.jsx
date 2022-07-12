@@ -8,7 +8,6 @@ function Signup() {
     let [tempPassword, setTempPassword] = useState("");
 
     const handleSubmit = async () => {
-        // checking password here, otherwise if they write "pass" then "password" the way we had it before, it would keep the password as "pass" even though they typed "password" fully
         if (userObject.password !== tempPassword) {
             console.log("password fields do not match");
         } else {
