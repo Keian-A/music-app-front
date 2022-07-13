@@ -1,7 +1,9 @@
+import './Header.css';
+
 function Header() {
     return (
         <div id="header">
-            <h1>Music App</h1>
+            <a id="title" href="/">Music App</a>
             <div>
                 <a href="/login">Login</a>
                 <a href="/signup">Signup</a>
